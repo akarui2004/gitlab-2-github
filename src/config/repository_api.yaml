@@ -1,0 +1,8 @@
+api:
+  github:
+    projects:
+      organization: https://api.github.com/orgs/{organization}/projectsV2
+      individual: https://api.github.com/users/{username}/projects
+  gitlab:
+    projects:
+      organization_url: https://example.com
