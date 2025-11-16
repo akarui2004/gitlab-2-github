@@ -1,5 +1,5 @@
 import type { ConfigObject, ConfigValue } from "@/types";
-import { resolveBase } from "./dir";
+import { resolveBase } from "./dir.helper";
 
 // Load config eagerly at module initialization
 const configData: ConfigObject = await (async () => {

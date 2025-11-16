@@ -5,4 +5,4 @@ api:
       individual: https://api.github.com/users/{username}/projects
   gitlab:
     projects:
-      organization_url: https://example.com
+      organization: https://example.com

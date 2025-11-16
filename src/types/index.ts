@@ -1,4 +1,4 @@
-export * from './config.type';
-export * from './request.type';
-export * from './string.helper.type';
+export * from './config-helper.type';
+export * from './request-util.type';
+export * from './string-helper.type';
 
