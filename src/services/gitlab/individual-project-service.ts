@@ -5,15 +5,16 @@ import { Request } from "@/utils";
 
 class IndividualProjectService extends BaseService {
   private apiUrl: string;
-  private userId: number;
 
   constructor(userId: number) {
     super();
 
+    if (typeof userId !== 'number') {
+      throw new Error('User ID must be a number');
+    }
+
     const apiUrlConf = config<string>('api.gitlab.project.individual');
     this.apiUrl = interpolate(apiUrlConf, { user_id: userId });
-
-    this.userId = userId;
   }
 
   async execute(): Promise<GitlabProjectResponse[]> {
