@@ -19,9 +19,8 @@ class Request {
   protected method: RequestMethod = RequestMethod.GET;
   protected opts: RequestOptions = {};
 
-  constructor(url: string, method: RequestMethod = RequestMethod.GET, opts: RequestOptions = {}) {
+  constructor(url: string, opts: RequestOptions = {}) {
     this.url = url;
-    this.method = method;
     this.opts = opts;
   }
 
@@ -41,14 +40,22 @@ class Request {
         );
       }
 
+      let result;
       const contentType = response.headers.get('content-type');
       if (contentType?.includes('application/json')) {
-        return response.json() as Promise<T>;
+        result = await response.json();
+        return result as T;
       }
-      return response.text() as T;
+
+      result = await response.text();
+      return result as T;
     } catch (error: any) {
       throw new Error(`Error sending request: ${error?.message || 'Unknown error'}`);
     }
+  }
+
+  public useMethod(method: RequestMethod): void {
+    this.method = method;
   }
 
   public setAuthToken(token: string): void {
