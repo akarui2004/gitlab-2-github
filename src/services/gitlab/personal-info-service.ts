@@ -1,0 +1,4 @@
+class PersonalInfoService {
+  __construct() {
+  }
+}
