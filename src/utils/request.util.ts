@@ -19,8 +19,7 @@ class Request {
   protected method: RequestMethod = RequestMethod.GET;
   protected opts: RequestOptions = {};
 
-  constructor(url: string, opts: RequestOptions = {}) {
-    this.url = url;
+  constructor(opts: RequestOptions = {}) {
     this.opts = opts;
   }
 
@@ -56,6 +55,11 @@ class Request {
 
   public useMethod(method: RequestMethod): void {
     this.method = method;
+  }
+
+  public setUrl(url: string): void {
+    if (!url || typeof url !== 'string') throw new Error('URL is required!!!');
+    this.url = url;
   }
 
   public setAuthToken(token: string): void {

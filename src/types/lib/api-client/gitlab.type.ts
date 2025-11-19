@@ -1,10 +1,10 @@
-export interface GitlabUserInfoIdentities {
+export interface GitlabUserIdentities {
   provider: string;
   extern_uid: string;
   saml_provider_id: number | null | undefined;
 }
 
-export interface GitlabUserInfoResponse {
+export interface GitlabProfileResponse {
   id: number;
   username: string;
   public_email: string;
@@ -23,7 +23,7 @@ export interface GitlabUserInfoResponse {
   can_create_project: boolean;
   two_factor_enabled: boolean;
   preferred_language: string;
-  identities: GitlabUserInfoIdentities[];
+  identities: GitlabUserIdentities[];
   organization: string;
   email: string;
   commit_email: string;
