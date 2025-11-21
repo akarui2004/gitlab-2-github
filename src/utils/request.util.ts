@@ -65,15 +65,17 @@ class Request {
   }
 
   public setAuthToken(token: string): void {
-    if (!token || typeof token !== 'string')
+    if (!token || typeof token !== 'string') {
       throw new Error('Invalid auth token');
+    }
 
     this.authToken = token;
   }
 
   private validateUrl() {
-    if (!this.url || typeof this.url !== 'string')
+    if (!this.url || typeof this.url !== 'string') {
       throw new Error('Invalid URL');
+    }
   }
 
   private buildRequestOptions(): RequestInit {
@@ -86,7 +88,7 @@ class Request {
   }
 
   private buildHeaders(): Record<string, string> {
-    let baseHeaders: Record<string, string> = {
+    const baseHeaders: Record<string, string> = {
       ...this.DEFAULT_HEADERS,
       ...this.opts.headers,
     };

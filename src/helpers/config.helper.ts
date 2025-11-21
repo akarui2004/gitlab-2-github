@@ -6,17 +6,13 @@ const configData: ConfigObject = await (async () => {
   try {
     const configFileUrl = resolveBase('src/config/repository-api.yaml');
     const configText = await Bun.file(configFileUrl).text();
-    const parsedConfig = Bun.YAML.parse(configText) as ConfigObject;
+    const parsedConfig = Bun.YAML.parse(configText);
 
-    if (
-      !parsedConfig ||
-      typeof parsedConfig !== 'object' ||
-      Array.isArray(parsedConfig)
-    ) {
+    if (typeof parsedConfig !== 'object' || Array.isArray(parsedConfig)) {
       throw new Error('Invalid YAML configuration: root must be an object');
     }
 
-    return parsedConfig;
+    return parsedConfig as ConfigObject;
   } catch (error: any) {
     if (error instanceof Error) {
       throw new Error(`Failed to load configuration: ${error.message}`);

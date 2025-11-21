@@ -19,7 +19,7 @@ class BaseApiClient {
 
   private validateAuthToken(): string {
     const authToken = Bun.env[this.authTokenEnvKey];
-    if (!authToken || typeof authToken !== 'string') {
+    if (typeof authToken !== 'string') {
       throw new Error(`${this.authTokenEnvKey} env not set!!!`);
     }
     return authToken;
@@ -29,7 +29,7 @@ class BaseApiClient {
     apiUrlConfigPath: ApiUrlConfigPath,
     apiPathReplacements: ApiPathReplacements = {}
   ): string {
-    if (!apiUrlConfigPath || typeof apiUrlConfigPath !== 'string') {
+    if (typeof apiUrlConfigPath !== 'string') {
       throw new Error('API config key is required!!!');
     }
 
