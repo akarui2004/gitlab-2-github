@@ -1,5 +1,6 @@
-import { config } from "@/helpers";
-import { Request } from "@/utils";
+import { config, interpolate } from '@/helpers';
+import type { ApiPathReplacements, ApiUrlConfigPath } from '@/types';
+import { Request } from '@/utils';
 
 class BaseApiClient {
   private readonly DEFAULT_AUTH_TOKEN_ENV_KEY: string = 'GITLAB_PAT';
@@ -24,17 +25,25 @@ class BaseApiClient {
     return authToken;
   }
 
-  private validateApiUrl(apiConfigKey: string | null | undefined): string {
-    if (!apiConfigKey || typeof apiConfigKey !== 'string') {
+  private validateApiUrl(
+    apiUrlConfigPath: ApiUrlConfigPath,
+    apiPathReplacements: ApiPathReplacements = {}
+  ): string {
+    if (!apiUrlConfigPath || typeof apiUrlConfigPath !== 'string') {
       throw new Error('API config key is required!!!');
     }
 
-    const apiUrl = config<string>(apiConfigKey);
+    const apiUrl = config<string>(apiUrlConfigPath);
     if (!apiUrl || typeof apiUrl !== 'string') {
-      throw new Error(`API URL not found or invalid for config key: ${apiConfigKey}!!!`);
+      throw new Error(
+        `API URL not found or invalid for config key: ${apiUrlConfigPath}!!!`
+      );
     }
 
-    return apiUrl;
+    const hasPathReplacement = Object.keys(apiPathReplacements).length > 0;
+    return hasPathReplacement
+      ? interpolate(apiUrl, apiPathReplacements)
+      : apiUrl;
   }
 
   private buildRequest(): Request {

@@ -1,5 +1,5 @@
-import type { ConfigObject, ConfigValue } from "@/types";
-import { resolveBase } from "./dir.helper";
+import type { ConfigObject, ConfigValue } from '@/types';
+import { resolveBase } from './dir.helper';
 
 // Load config eagerly at module initialization
 const configData: ConfigObject = await (async () => {
@@ -8,8 +8,12 @@ const configData: ConfigObject = await (async () => {
     const configText = await Bun.file(configFileUrl).text();
     const parsedConfig = Bun.YAML.parse(configText) as ConfigObject;
 
-    if (!parsedConfig || typeof parsedConfig !== 'object' || Array.isArray(parsedConfig)) {
-      throw new Error('Invalid YAML configuration: root must be an object')
+    if (
+      !parsedConfig ||
+      typeof parsedConfig !== 'object' ||
+      Array.isArray(parsedConfig)
+    ) {
+      throw new Error('Invalid YAML configuration: root must be an object');
     }
 
     return parsedConfig;
@@ -21,7 +25,10 @@ const configData: ConfigObject = await (async () => {
   }
 })();
 
-const getNestedValue = <T extends ConfigValue>(obj: ConfigObject, keys: string[]): T => {
+const getNestedValue = <T extends ConfigValue>(
+  obj: ConfigObject,
+  keys: string[]
+): T => {
   let current: ConfigValue = obj;
 
   for (const key of keys) {
@@ -38,14 +45,14 @@ const getNestedValue = <T extends ConfigValue>(obj: ConfigObject, keys: string[]
   }
 
   return current as T;
-}
+};
 
 const config = <T extends ConfigValue>(key: string): T => {
   if (!key || typeof key !== 'string') {
     throw new Error('Config key must be a non-empty string');
   }
 
-  const keys = key.split('.').filter(k => k.length > 0);
+  const keys = key.split('.').filter((k) => k.length > 0);
 
   if (keys.length === 0) {
     throw new Error('Config key cannot be empty');

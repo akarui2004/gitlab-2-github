@@ -8,7 +8,7 @@ const interpolate = (
   const { defaultValue = '' } = options;
 
   return template.replace(/\{([\w.]+)\}/g, (_, key: string): string => {
-    const keys = key.split(".");
+    const keys = key.split('.');
     let value = vars;
 
     for (const k of keys) {
@@ -17,7 +17,7 @@ const interpolate = (
     }
 
     return String(value ?? defaultValue);
-  })
-}
+  });
+};
 
 export { interpolate };

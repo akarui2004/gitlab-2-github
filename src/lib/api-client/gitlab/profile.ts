@@ -1,5 +1,5 @@
-import type { GitlabProfileResponse } from "@/types";
-import { BaseApiClient } from "../base";
+import type { GitlabProfileResponse } from '@/types';
+import { BaseApiClient } from '../base';
 
 class Profile extends BaseApiClient {
   constructor() {

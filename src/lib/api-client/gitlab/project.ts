@@ -1,6 +1,6 @@
-import { interpolate } from "@/helpers";
-import { BaseApiClient } from "../base";
-import type { GitlabProjectResponse } from "@/types";
+import { interpolate } from '@/helpers';
+import { BaseApiClient } from '../base';
+import type { GitlabProjectResponse } from '@/types';
 
 class Project extends BaseApiClient {
   constructor(userId: number) {
