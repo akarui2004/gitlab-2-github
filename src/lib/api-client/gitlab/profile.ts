@@ -3,13 +3,17 @@ import { BaseApiClient } from '../base';
 
 class Profile extends BaseApiClient {
   constructor() {
-    super('api.gitlab.user.me'); // api.gitlab.user.me in repository-api.yaml
+    super();
   }
 
   async getProfile(): Promise<GitlabProfileResponse> {
-    this.request.setUrl(this.apiUrl);
-    const response = await this.request.send<GitlabProfileResponse>();
-    return response;
+    this.apiRequest.setUrl(this.userProfileApi());
+    const result = await this.apiRequest.send<GitlabProfileResponse>();
+    return result;
+  }
+
+  private userProfileApi(): string {
+    return this.buildApiUrl('api.gitlab.user.profile'); // api.gitlab.user.me in repository-api.yaml
   }
 }
 

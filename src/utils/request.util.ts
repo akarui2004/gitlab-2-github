@@ -2,7 +2,7 @@ import type { RequestOptions } from '@/types';
 import { RequestMethod } from '@/enums';
 import { RequestError } from '@/errors';
 
-class Request {
+class ApiRequest {
   private readonly DEFAULT_TIMEOUT: number = 10000;
   private readonly DEFAULT_HEADERS: Record<string, string> = {
     'Content-Type': 'application/json',
@@ -113,4 +113,4 @@ class Request {
   }
 }
 
-export { Request };
+export { ApiRequest };

@@ -10,20 +10,23 @@ api:
       issue:
         list: https://api.github.com/repos/{owner}/{repo}/issues
         create: https://api.github.com/repos/{owner}/{repo}/issues
-        detail: https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}
-        update: https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}
+        detail: https://api.github.com/repos/{owner}/{repo}/issues/{issueNumber}
+        update: https://api.github.com/repos/{owner}/{repo}/issues/{issueNumber}
   gitlab:
     user:
-      me: https://gitlab.com/api/v4/user
+      profile: https://gitlab.com/api/v4/user
+      project:
+        list: https://gitlab.com/api/v4/users/{userId}/projects
+    organization:
+      project:
+        list: https://gitlab.com/api/v4/projects
     project:
-      organization: https://gitlab.com/api/v4/projects
-      individual: https://gitlab.com/api/v4/users/{user_id}/projects
       issue:
-        list: https://gitlab.com/api/v4/projects/{project_id}/issues
-        create: https://gitlab.com/api/v4/projects/{project_id}/issues
-        update: https://gitlab.com/api/v4/projects/{project_id}/issues/{issue_id}
-        detail: https://gitlab.com/api/v4/projects/{project_id}/issues/{issue_id}
-        delete: https://gitlab.com/api/v4/projects/{project_id}/issues/{issue_id}
+        list: https://gitlab.com/api/v4/projects/{projectId}/issues
+        create: https://gitlab.com/api/v4/projects/{projectId}/issues
+        update: https://gitlab.com/api/v4/projects/{projectId}/issues/{issueId}
+        detail: https://gitlab.com/api/v4/projects/{projectId}/issues/{issueId}
+        delete: https://gitlab.com/api/v4/projects/{projectId}/issues/{issueId}
     issue:
       list: https://gitlab.com/api/v4/issues
-      detail: https://gitlab.com/api/v4/issues/{issue_id}
+      detail: https://gitlab.com/api/v4/issues/{issueId}
