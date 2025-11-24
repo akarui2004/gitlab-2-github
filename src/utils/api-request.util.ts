@@ -27,8 +27,14 @@ class ApiRequest {
     try {
       this.validateUrl();
 
+      // Initialize url with request parameters
+      const apiUrl = this.buildRequestParams(new URL(this.url));
+
+      // Initialize request options
       const requestInit = this.buildRequestOptions();
-      const response = await fetch(this.url, requestInit);
+
+      // Send request
+      const response = await fetch(apiUrl, requestInit);
 
       if (!response.ok) {
         const errorBody = await response.text().catch(() => 'Unknown error');
@@ -110,6 +116,17 @@ class ApiRequest {
 
   private buildAbortSignal(): AbortSignal {
     return AbortSignal.timeout(this.opts.timeout || this.DEFAULT_TIMEOUT);
+  }
+
+  private buildRequestParams(apiUrl: URL): URL {
+    if (!this.opts.params) return apiUrl;
+
+    for (const [key, value] of Object.entries(this.opts.params)) {
+      if (value === null) continue;
+      apiUrl.searchParams.append(key, value.toString());
+    }
+
+    return apiUrl;
   }
 }
 
