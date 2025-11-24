@@ -1,4 +1,4 @@
-import type { RequestOptions } from '@/types';
+import type { ApiRequestOptions } from '@/types';
 import { RequestMethod } from '@/enums';
 import { RequestError } from '@/errors';
 
@@ -7,7 +7,7 @@ class ApiRequest {
   private readonly DEFAULT_HEADERS: Record<string, string> = {
     'Content-Type': 'application/json',
     Accept: 'application/vnd.github+json',
-    'X-GitHub-Api-Version': '2022-11-28',
+    'X-GitHub-Api-Version': Bun.env.GITHUB_API_VERSION || '',
   };
   private readonly NO_BODY_METHODS: RequestMethod[] = [
     RequestMethod.GET,
@@ -17,9 +17,9 @@ class ApiRequest {
   private authToken: string = '';
   public url: string = '';
   protected method: RequestMethod = RequestMethod.GET;
-  protected opts: RequestOptions = {};
+  protected opts: ApiRequestOptions = {};
 
-  constructor(opts: RequestOptions = {}) {
+  constructor(opts: ApiRequestOptions = {}) {
     this.opts = opts;
   }
 

@@ -1,7 +1,7 @@
-interface RequestOptions {
+interface ApiRequestOptions {
   headers?: Record<string, string>;
   timeout?: number;
   body?: any;
 }
 
-export type { RequestOptions };
+export type { ApiRequestOptions };
