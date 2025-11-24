@@ -1,8 +1,8 @@
 import { interpolate } from '@/helpers';
 import type { GitlabProjectResponse } from '@/types';
-import { BaseApiClient } from '../base';
+import { BaseApiClient } from '../../base';
 
-class User extends BaseApiClient {
+class Project extends BaseApiClient {
   constructor() {
     super();
   }
@@ -19,4 +19,4 @@ class User extends BaseApiClient {
   }
 }
 
-export { User };
+export { Project };

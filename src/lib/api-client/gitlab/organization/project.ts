@@ -1,7 +1,7 @@
 import type { GitlabProjectResponse } from '@/types';
-import { BaseApiClient } from '../base';
+import { BaseApiClient } from '../../base';
 
-class Organization extends BaseApiClient {
+class Project extends BaseApiClient {
   constructor() {
     super();
   }
@@ -17,4 +17,4 @@ class Organization extends BaseApiClient {
   }
 }
 
-export { Organization };
+export { Project };

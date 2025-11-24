@@ -1,3 +1,3 @@
-export { Profile as GitlabProfile } from './profile';
-export { User as GitlabUser } from './user';
-export { Organization as GitlabOrganization } from './organization';
+export { Profile as GitlabMeProfile } from './me/profile';
+export { Project as GitlabMeProject } from './me/project';
+export { Project as GitlabOrgProject } from './organization/project';
