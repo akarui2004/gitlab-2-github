@@ -1,5 +1,4 @@
-import { interpolate } from '@/helpers';
-import type { GitlabProjectResponse } from '@/types';
+import type { GitlabProjectResponse, ProjectQueryParams } from '@/types';
 import { BaseApiClient } from '../../base';
 
 class Project extends BaseApiClient {
@@ -7,15 +6,18 @@ class Project extends BaseApiClient {
     super();
   }
 
-  async getProjects(userId: number): Promise<GitlabProjectResponse[]> {
+  async getProjects(
+    userId: number,
+    params: ProjectQueryParams = {}
+  ): Promise<GitlabProjectResponse[]> {
     this.apiRequest.setUrl(this.projectApi(userId));
+    this.apiRequest.setQueryParams(params); // set query params when params existing
     const result = await this.apiRequest.send<GitlabProjectResponse[]>();
     return result;
   }
 
   private projectApi(userId: number) {
-    const apiUrl = this.buildApiUrl('api.gitlab.user.project.list');
-    return interpolate(apiUrl, { userId });
+    return this.buildApiUrl('api.gitlab.user.project.list', { userId });
   }
 }
 
