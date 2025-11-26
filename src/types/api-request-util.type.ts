@@ -2,7 +2,11 @@ interface ApiRequestOptions {
   headers?: Record<string, string>;
   timeout?: number;
   body?: any;
-  params?: Record<string, string>;
+  queryParams?: ApiQueryParam;
+}
+
+export interface ApiQueryParam {
+  [key: string]: string | boolean | undefined;
 }
 
 export type { ApiRequestOptions };

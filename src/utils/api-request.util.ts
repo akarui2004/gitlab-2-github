@@ -1,4 +1,4 @@
-import type { ApiRequestOptions } from '@/types';
+import type { ApiRequestOptions, ApiQueryParam } from '@/types';
 import { RequestMethod } from '@/enums';
 import { RequestError } from '@/errors';
 
@@ -28,7 +28,7 @@ class ApiRequest {
       this.validateUrl();
 
       // Initialize url with request parameters
-      const apiUrl = this.buildRequestParams(new URL(this.url));
+      const apiUrl = this.buildQueryParams(new URL(this.url));
 
       // Initialize request options
       const requestInit = this.buildRequestOptions();
@@ -78,6 +78,39 @@ class ApiRequest {
     this.authToken = token;
   }
 
+  public setQueryParams(queryParams: ApiQueryParam): void {
+    if (!queryParams || typeof queryParams !== 'object') {
+      return; // if not object, do nothing
+    }
+
+    const filteredParams = this.filterQueryParams(queryParams);
+
+    if (Object.keys(filteredParams).length === 0) {
+      return; // if no params, do nothing
+    }
+
+    // override the existing query params with the new ones
+    this.opts = { ...this.opts, queryParams: filteredParams };
+  }
+
+  private filterQueryParams(queryParams: ApiQueryParam): ApiQueryParam {
+    return Object.entries(queryParams).reduce((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = value;
+      }
+      return acc;
+    }, {} as ApiQueryParam);
+  }
+
+  public setBody(body: Record<string, any>): void {
+    if (!body || typeof body !== 'object') {
+      throw new Error('Invalid body');
+    }
+
+    // Override the existing body with the new one
+    this.opts = { ...this.opts, body };
+  }
+
   private validateUrl() {
     if (!this.url || typeof this.url !== 'string') {
       throw new Error('Invalid URL');
@@ -118,11 +151,11 @@ class ApiRequest {
     return AbortSignal.timeout(this.opts.timeout || this.DEFAULT_TIMEOUT);
   }
 
-  private buildRequestParams(apiUrl: URL): URL {
-    if (!this.opts.params) return apiUrl;
+  private buildQueryParams(apiUrl: URL): URL {
+    if (!this.opts.queryParams) return apiUrl;
 
-    for (const [key, value] of Object.entries(this.opts.params)) {
-      if (value === null) continue;
+    for (const [key, value] of Object.entries(this.opts.queryParams)) {
+      if (value === null || value === undefined) continue;
       apiUrl.searchParams.append(key, value.toString());
     }
 
