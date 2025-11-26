@@ -6,7 +6,7 @@ interface ApiRequestOptions {
 }
 
 export interface ApiQueryParam {
-  [key: string]: string | boolean | undefined;
+  [key: string]: string | number | boolean | undefined;
 }
 
 export type { ApiRequestOptions };
