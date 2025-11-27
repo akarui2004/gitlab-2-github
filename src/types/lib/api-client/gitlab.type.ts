@@ -152,3 +152,105 @@ export interface GitlabProjectResponse {
   container_registry_image_prefix: string;
   _links: GitlabProjectLinks;
 }
+
+export interface Response {
+  id: number;
+  iid: number;
+  project_id: number;
+  title: string;
+  description: string;
+  state: string;
+  created_at: Date;
+  updated_at: Date;
+  closed_at: null;
+  closed_by: null;
+  labels: any[];
+  milestone: GitlabMilestone;
+  assignees: GitlabAssignee[];
+  author: GitlabAuthor;
+  type: string;
+  assignee: GitlabAssignee;
+  user_notes_count: number;
+  merge_requests_count: number;
+  upvotes: number;
+  downvotes: number;
+  due_date: null;
+  confidential: boolean;
+  discussion_locked: null;
+  issue_type: string;
+  web_url: string;
+  time_stats: GitlabTimeStats;
+  task_completion_status: GitlabTaskCompletionStatus;
+  blocking_issues_count: number;
+  has_tasks: boolean;
+  _links: GitlabIssueLinks;
+  references: GitlabReferences;
+  severity: string;
+  moved_to_id: null;
+  imported: boolean;
+  imported_from: string;
+  service_desk_reply_to: null;
+}
+
+export interface GitlabIssueLinks {
+  self: string;
+  notes: string;
+  award_emoji: string;
+  project: string;
+  closed_as_duplicate_of: null;
+}
+
+export interface GitlabAssignee {
+  id: number;
+  username: string;
+  public_email: string;
+  name: string;
+  state: string;
+  locked: boolean;
+  avatar_url: string;
+  web_url: string;
+}
+
+export interface GitlabAuthor {
+  id: number;
+  username: string;
+  public_email: string;
+  name: string;
+  state: string;
+  locked: boolean;
+  avatar_url: string;
+  web_url: string;
+}
+
+export interface GitlabMilestone {
+  id: number;
+  iid: number;
+  project_id: number;
+  title: string;
+  description: string;
+  state: string;
+  created_at: Date;
+  updated_at: Date;
+  due_date: null;
+  start_date: null;
+  expired: boolean;
+  web_url: string;
+}
+
+export interface GitlabReferences {
+  short: string;
+  relative: string;
+  full: string;
+}
+
+export interface GitlabTaskCompletionStatus {
+  count: number;
+  completed_count: number;
+}
+
+export interface GitlabTimeStats {
+  time_estimate: number;
+  total_time_spent: number;
+  human_time_estimate: null;
+  human_total_time_spent: null;
+}

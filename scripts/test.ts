@@ -10,13 +10,13 @@ const profile = await userGitLabApiClient.getProfile();
 
 const userProjectApiClient = new GitlabMeProject();
 const userProjects = await userProjectApiClient.getProjects(profile.id, {
-  search: 'ToDo Application',
+  search: 'expressjs-todo-application',
   simple: true,
 });
 
 const filteredProject = userProjects.reduce(
   (acc: GitlabProjectResponse[], project) => {
-    if (project.name === 'ToDo Application') {
+    if (project.name === 'ExpressJS ToDo Application') {
       acc.push(project);
     }
     return acc;
@@ -32,4 +32,8 @@ if (!projectId) {
 const projectIssueApiClient = new GitlabProjectIssue(projectId);
 const issues = await projectIssueApiClient.getIssues();
 
-console.log(issues);
+console.log(issues[0]);
+
+// write result to response.json file
+// import { writeFileSync } from 'fs';
+// writeFileSync('response.json', JSON.stringify(issues[0], null, 2));
